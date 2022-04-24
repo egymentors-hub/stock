@@ -81,21 +81,6 @@ class RemarkSoldItem(models.TransientModel):
 						'context': transfer.env.context,
 					}
 
-				if transfer._get_overprocessed_stock_moves() and not transfer._context.get('skip_overprocessed_check'):
-					view = transfer.env.ref('stock.view_overprocessed_transfer')
-					wiz = transfer.env['stock.overprocessed.transfer'].create({'picking_id': transfer.id})
-					return {
-						'type': 'ir.actions.act_window',
-						'binding_view_types': 'form',
-						'view_mode': 'form',
-						'res_model': 'stock.overprocessed.transfer',
-						'views': [(view.id, 'form')],
-						'view_id': view.id,
-						'target': 'new',
-						'res_id': wiz.id,
-						'context': transfer.env.context,
-					}
-	
 				# Check backorder should check for other barcodes
 				if transfer._check_backorder():
 					return transfer.action_generate_backorder_wizard()
