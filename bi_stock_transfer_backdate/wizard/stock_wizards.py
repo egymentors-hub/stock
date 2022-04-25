@@ -84,5 +84,5 @@ class RemarkSoldItem(models.TransientModel):
 				# Check backorder should check for other barcodes
 				if transfer._check_backorder():
 					return transfer.action_generate_backorder_wizard()
-				transfer.action_done()
+				#transfer.action_done()
 				return
